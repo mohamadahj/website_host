@@ -3,743 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Optialy — Real-Time Marketing Intelligence Platform</title>
-<meta name="description" content="Optialy is the real-time intelligence layer for marketing. Ask questions, get instant analysis. No pipelines. No waiting.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Optialy - Real-Time Marketing Intelligence</title>
+<meta name="description" content="Real-time intelligence layer for marketing. Ask questions, get instant analysis.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-:root {
-  --bg-primary: #0A0E1A;
-  --bg-secondary: #111827;
-  --bg-card: #1A2035;
-  --bg-card-hover: #222B45;
-  --accent: #00D4AA;
-  --accent-dim: #00B894;
-  --accent-glow: rgba(0, 212, 170, 0.15);
-  --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  --border: rgba(148, 163, 184, 0.1);
-  --border-accent: rgba(0, 212, 170, 0.3);
-  --gradient-1: linear-gradient(135deg, #00D4AA 0%, #0EA5E9 100%);
-  --gradient-2: linear-gradient(135deg, #0EA5E9 0%, #8B5CF6 100%);
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-}
-
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+:root{
+  --white:#ffffff;
+  --bg:#f8f9fb;
+  --gray50:#f3f4f6;
+  --gray100:#e8eaef;
+  --gray200:#d1d5de;
+  --gray300:#9ca3b4;
+  --gray800:#2d3142;
+  --gray900:#1b1e2b;
+  --black:#111318;
+  --accent:#0c8c6e;
+  --accent-h:#0a7a5f;
+  --accent-bg:rgba(12,140,110,0.07);
+  --accent-bd:rgba(12,140,110,0.2);
+  --fd:'Outfit',sans-serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
 }
 
-/* ---- UTILITY ---- */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.section { padding: 120px 0; position: relative; }
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-  display: block;
-}
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 20px;
-  color: var(--text-primary);
-}
-.section-subtitle {
-  font-size: 18px;
-  color: var(--text-secondary);
-  max-width: 600px;
-  line-height: 1.7;
+html{scroll-behavior:smooth}
+
+body{
+  font-family:var(--fb);
+  background:var(--white);
+  color:var(--gray900);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 
-/* ---- NAV ---- */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 16px 0;
-  background: rgba(10, 14, 26, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  transition: all 0.3s ease;
-}
-nav .container {
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 24px; font-weight: 700;
-  color: var(--text-primary);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-.nav-logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 36px; align-items: center; }
-.nav-links a {
-  color: var(--text-secondary); text-decoration: none;
-  font-size: 14px; font-weight: 500;
-  transition: color 0.2s;
-  letter-spacing: 0.2px;
-}
-.nav-links a:hover { color: var(--text-primary); }
-.nav-cta {
-  background: var(--gradient-1) !important;
-  color: var(--bg-primary) !important;
-  padding: 10px 24px !important;
-  border-radius: 8px;
-  font-weight: 600 !important;
-  transition: opacity 0.2s !important;
-}
-.nav-cta:hover { opacity: 0.9; }
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.sec{padding:96px 0}
+.sec-alt{background:var(--bg)}
 
-.mobile-menu-btn {
-  display: none; background: none; border: none; cursor: pointer; padding: 8px;
-}
-.mobile-menu-btn span {
-  display: block; width: 24px; height: 2px; background: var(--text-primary);
-  margin: 5px 0; transition: 0.3s;
+.label{
+  font-family:var(--fm);
+  font-size:12px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:12px;
+  display:block;
+  font-weight:500;
 }
 
-/* ---- HERO ---- */
-.hero {
-  min-height: 100vh;
-  display: flex; align-items: center;
-  padding-top: 80px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -200px; right: -200px;
-  width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -100px; left: -100px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(14,165,233,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-content { position: relative; z-index: 2; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--accent-glow);
-  border: 1px solid var(--border-accent);
-  border-radius: 100px;
-  padding: 8px 20px;
-  margin-bottom: 32px;
-  font-size: 13px;
-  font-family: var(--font-mono);
-  color: var(--accent);
-  animation: fadeInUp 0.6s ease;
-}
-.hero-badge .dot {
-  width: 8px; height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse-dot 2s infinite;
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(42px, 6vw, 76px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -2px;
-  margin-bottom: 24px;
-  animation: fadeInUp 0.6s ease 0.1s both;
-}
-.hero h1 .gradient-text {
-  background: var(--gradient-1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero p {
-  font-size: 20px;
-  color: var(--text-secondary);
-  max-width: 540px;
-  line-height: 1.7;
-  margin-bottom: 40px;
-  animation: fadeInUp 0.6s ease 0.2s both;
-}
-.hero-actions {
-  display: flex; gap: 16px; flex-wrap: wrap;
-  animation: fadeInUp 0.6s ease 0.3s both;
-}
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--gradient-1);
-  color: var(--bg-primary);
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: 600; font-size: 16px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: none; cursor: pointer;
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,170,0.3); }
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: transparent;
-  color: var(--text-primary);
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: 500; font-size: 16px;
-  text-decoration: none;
-  border: 1px solid var(--border);
-  transition: all 0.3s ease;
-}
-.btn-secondary:hover { border-color: var(--text-muted); background: rgba(255,255,255,0.03); }
-
-.hero-stats {
-  display: flex; gap: 48px; margin-top: 72px; padding-top: 40px;
-  border-top: 1px solid var(--border);
-  animation: fadeInUp 0.6s ease 0.4s both;
-}
-.hero-stat .number {
-  font-family: var(--font-display);
-  font-size: 36px; font-weight: 700;
-  background: var(--gradient-1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-stat .label {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-top: 4px;
+.title{
+  font-family:var(--fd);
+  font-size:clamp(28px,4vw,42px);
+  font-weight:700;
+  line-height:1.18;
+  margin-bottom:14px;
+  color:var(--gray900);
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+.subtitle{
+  font-size:16px;
+  color:var(--gray300);
+  max-width:540px;
+  line-height:1.7;
 }
 
-/* ---- PROBLEM ---- */
-.problem { background: var(--bg-secondary); }
-.problem-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 56px;
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:14px 0;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--gray100);
 }
-.problem-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 36px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-.problem-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #EF4444, #F59E0B);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.problem-card:hover { border-color: rgba(239, 68, 68, 0.3); transform: translateY(-4px); }
-.problem-card:hover::before { opacity: 1; }
-.problem-icon {
-  width: 48px; height: 48px;
-  background: rgba(239, 68, 68, 0.1);
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  margin-bottom: 20px;
-}
-.problem-card h3 {
-  font-family: var(--font-display);
-  font-size: 20px; font-weight: 600;
-  margin-bottom: 12px;
-}
-.problem-card p {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.7;
+.nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--fd);font-size:23px;font-weight:800;color:var(--gray900);text-decoration:none}
+.nav-logo b{color:var(--accent)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--gray300);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--gray900)}
+.nav-cta{background:var(--gray900) !important;color:var(--white) !important;padding:9px 20px !important;border-radius:8px;font-weight:600 !important}
+.nav-cta:hover{background:var(--black) !important}
+.mob-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.mob-btn i{display:block;width:22px;height:2px;background:var(--gray900);margin:5px 0}
+
+/* BUTTONS */
+.bp{display:inline-flex;align-items:center;gap:8px;background:var(--gray900);color:var(--white);padding:14px 28px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:none;cursor:pointer;transition:all .25s}
+.bp:hover{background:var(--black);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.ba{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--white);padding:14px 28px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:none;cursor:pointer;transition:all .25s}
+.ba:hover{background:var(--accent-h);transform:translateY(-2px);box-shadow:0 6px 20px rgba(12,140,110,.18)}
+.bs{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--gray900);padding:14px 28px;border-radius:10px;font-weight:500;font-size:15px;text-decoration:none;border:1px solid var(--gray200);transition:all .25s}
+.bs:hover{border-color:var(--gray300);background:var(--bg)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;background:var(--bg)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-bg);border:1px solid var(--accent-bd);border-radius:100px;padding:7px 16px;margin-bottom:26px;font-size:12px;font-family:var(--fm);color:var(--accent)}
+.hero-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:var(--fd);font-size:clamp(38px,5.5vw,64px);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:20px;color:var(--gray900)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-desc{font-size:18px;color:var(--gray300);max-width:500px;line-height:1.7;margin-bottom:34px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:40px;margin-top:60px;padding-top:32px;border-top:1px solid var(--gray200)}
+.h-num{font-family:var(--fd);font-size:30px;font-weight:700;color:var(--accent)}
+.h-lbl{font-size:13px;color:var(--gray300);margin-top:2px}
+
+/* PROBLEM CARDS */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.pcard{background:var(--white);border:1px solid var(--gray100);border-radius:12px;padding:30px;transition:all .3s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+.picon{width:42px;height:42px;background:#fef2f2;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.pcard h3{font-family:var(--fd);font-size:17px;font-weight:600;margin-bottom:8px}
+.pcard p{font-size:14px;color:var(--gray300);line-height:1.7}
+
+/* SOLUTION */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:44px}
+.svis{background:var(--white);border:1px solid var(--gray100);border-radius:14px;padding:28px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.fl{display:flex;flex-direction:column;gap:10px}
+.fls{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border-radius:9px;border:1px solid var(--gray100);transition:all .3s}
+.fls:hover{border-color:var(--accent-bd);background:var(--accent-bg)}
+.fln{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:13px;font-weight:700;color:var(--white);flex-shrink:0}
+.flt{font-weight:500;font-size:14px;color:var(--gray900)}
+.fld{font-size:12px;color:var(--gray300);margin-top:1px}
+.flc{width:2px;height:10px;background:var(--accent-bd);margin-left:32px}
+.sfeats{display:flex;flex-direction:column;gap:22px}
+.sfeat{display:flex;gap:12px}
+.sfi{width:40px;height:40px;background:var(--accent-bg);border:1px solid var(--accent-bd);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.sfeat h4{font-family:var(--fd);font-size:15px;font-weight:600;margin-bottom:4px}
+.sfeat p{font-size:13px;color:var(--gray300);line-height:1.6}
+
+/* DEMO */
+.demoh{text-align:center;margin-bottom:44px}
+.demoh .subtitle{margin:0 auto}
+.demow{max-width:880px;margin:0 auto}
+.demof{border-radius:12px;overflow:hidden;border:1px solid var(--gray200);background:var(--black);box-shadow:0 12px 48px rgba(0,0,0,.12)}
+.demobar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--gray900);border-bottom:1px solid rgba(255,255,255,.06)}
+.demodots{display:flex;gap:6px}
+.demodots i{display:block;width:10px;height:10px;border-radius:50%}
+.demodots i:nth-child(1){background:#ef4444}
+.demodots i:nth-child(2){background:#f59e0b}
+.demodots i:nth-child(3){background:#22c55e}
+.demotl{font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.5px}
+.demosp{width:54px}
+.demof video{display:block;width:100%;height:auto}
+
+/* COMPARE */
+.cmp{margin-top:44px;border-radius:12px;overflow:hidden;border:1px solid var(--gray100);background:var(--white);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.cmp table{width:100%;border-collapse:collapse}
+.cmp th,.cmp td{padding:15px 22px;text-align:left;font-size:14px;border-bottom:1px solid var(--gray100)}
+.cmp thead th{background:var(--gray50);font-family:var(--fd);font-weight:600;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--gray300)}
+.cmp thead th:last-child{color:var(--accent)}
+.cmp tbody td{color:var(--gray300)}
+.cmp tbody td:first-child{font-weight:500;color:var(--gray900)}
+.cmp tbody td:last-child{color:var(--accent);font-weight:500}
+.cmp tbody tr:hover{background:var(--accent-bg)}
+.cmp tbody tr:last-child td{border-bottom:none}
+
+/* CTA */
+.ctasec{padding:96px 0;text-align:center;background:var(--gray900);color:var(--white)}
+.ctasec .label{color:var(--accent)}
+.ctasec .title{color:var(--white);max-width:540px;margin:0 auto 14px}
+.ctasec .title em{font-style:normal;color:var(--accent)}
+.ctasec .subtitle{color:rgba(255,255,255,.5);margin:0 auto 32px;text-align:center}
+.ctabtns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+.foot{padding:36px 0;border-top:1px solid var(--gray100);background:var(--white)}
+.foot .wrap{display:flex;justify-content:space-between;align-items:center}
+.foot-logo{font-family:var(--fd);font-size:17px;font-weight:800;color:var(--gray900)}
+.foot-logo b{color:var(--accent)}
+.foot-lnks{display:flex;gap:20px}
+.foot-lnks a{color:var(--gray300);text-decoration:none;font-size:13px;transition:color .2s}
+.foot-lnks a:hover{color:var(--gray900)}
+.foot-cp{font-size:12px;color:var(--gray300)}
+
+/* FADE */
+.fi{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
+.fi.v{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px 24px;gap:14px;border-bottom:1px solid var(--gray100);box-shadow:0 6px 20px rgba(0,0,0,.07)}
+  .mob-btn{display:block}
+  .pgrid{grid-template-columns:1fr;max-width:420px}
+  .sgrid{grid-template-columns:1fr}
+  .hero-stats{gap:24px;flex-wrap:wrap}
+  .cmp{overflow-x:auto}
+  .foot .wrap{flex-direction:column;gap:16px;text-align:center}
+  .sec{padding:68px 0}
 }
 
-/* ---- SOLUTION ---- */
-.solution-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-  margin-top: 56px;
-}
-.solution-visual {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 40px;
-  position: relative;
-}
-.solution-visual::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 20px;
-  background: var(--gradient-1);
-  opacity: 0.1;
-  z-index: 0;
-}
-.flow-diagram {
-  position: relative; z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.flow-step {
-  display: flex; align-items: center; gap: 16px;
-  padding: 16px 20px;
-  background: rgba(255,255,255,0.03);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  transition: all 0.3s;
-}
-.flow-step:hover { border-color: var(--border-accent); background: var(--accent-glow); }
-.flow-num {
-  width: 36px; height: 36px;
-  background: var(--gradient-1);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 14px; font-weight: 700;
-  color: var(--bg-primary);
-  flex-shrink: 0;
-}
-.flow-step .flow-label {
-  font-weight: 500; font-size: 15px;
-}
-.flow-step .flow-desc {
-  font-size: 13px; color: var(--text-muted); margin-top: 2px;
-}
-.flow-connector {
-  width: 2px; height: 16px;
-  background: var(--border-accent);
-  margin-left: 37px;
-}
-.solution-features { display: flex; flex-direction: column; gap: 28px; }
-.solution-feature {
-  display: flex; gap: 16px;
-}
-.feature-icon {
-  width: 44px; height: 44px;
-  background: var(--accent-glow);
-  border: 1px solid var(--border-accent);
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-.solution-feature h4 {
-  font-family: var(--font-display);
-  font-size: 17px; font-weight: 600;
-  margin-bottom: 6px;
-}
-.solution-feature p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* ---- DEMO ---- */
-.demo-section { background: var(--bg-secondary); }
-.demo-header { text-align: center; margin-bottom: 56px; }
-.demo-header .section-subtitle { margin: 0 auto; }
-.demo-wrapper {
-  position: relative;
-  max-width: 960px;
-  margin: 0 auto;
-}
-.demo-glow {
-  position: absolute;
-  inset: -40px;
-  background: radial-gradient(ellipse at center, rgba(0,212,170,0.1) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-.demo-frame {
-  position: relative;
-  z-index: 1;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border-accent);
-  background: #000;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 60px rgba(0,212,170,0.08);
-}
-.demo-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
-}
-.demo-dots {
-  display: flex; gap: 8px;
-}
-.demo-dots span {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--border);
-}
-.demo-dots span:first-child { background: #EF4444; }
-.demo-dots span:nth-child(2) { background: #F59E0B; }
-.demo-dots span:last-child { background: #22C55E; }
-.demo-title {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-}
-.demo-frame video {
-  display: block;
-  width: 100%;
-  height: auto;
-  background: #000;
-}
-
-/* ---- DIFFERENTIATORS ---- */
-.diff { background: var(--bg-secondary); }
-.diff-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-top: 56px;
-}
-.diff-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 40px;
-  transition: all 0.3s ease;
-}
-.diff-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
-.diff-card .diff-header {
-  display: flex; align-items: center; gap: 12px;
-  margin-bottom: 16px;
-}
-.diff-card .diff-icon {
-  width: 40px; height: 40px;
-  background: var(--accent-glow);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-.diff-card h3 {
-  font-family: var(--font-display);
-  font-size: 18px; font-weight: 600;
-}
-.diff-card p {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-/* ---- COMPARISON TABLE ---- */
-.compare-table {
-  margin-top: 56px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-.compare-table table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.compare-table th, .compare-table td {
-  padding: 18px 28px;
-  text-align: left;
-  font-size: 15px;
-  border-bottom: 1px solid var(--border);
-}
-.compare-table thead th {
-  background: var(--bg-card);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.compare-table thead th:last-child { color: var(--accent); }
-.compare-table tbody td {
-  color: var(--text-secondary);
-}
-.compare-table tbody td:first-child {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-.compare-table tbody td:last-child {
-  color: var(--accent);
-  font-weight: 500;
-}
-.compare-table tbody tr:hover { background: rgba(0,212,170,0.03); }
-.compare-table tbody tr:last-child td { border-bottom: none; }
-
-/* ---- PRICING ---- */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 56px;
-}
-.pricing-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 40px;
-  transition: all 0.3s;
-  position: relative;
-}
-.pricing-card.featured {
-  border-color: var(--accent);
-  background: linear-gradient(180deg, rgba(0,212,170,0.05) 0%, var(--bg-card) 100%);
-}
-.pricing-card.featured::before {
-  content: 'Most Popular';
-  position: absolute;
-  top: -12px; left: 50%; transform: translateX(-50%);
-  background: var(--gradient-1);
-  color: var(--bg-primary);
-  font-size: 12px; font-weight: 600;
-  padding: 4px 16px;
-  border-radius: 100px;
-  font-family: var(--font-mono);
-}
-.pricing-card:hover { transform: translateY(-4px); }
-.pricing-tier {
-  font-family: var(--font-display);
-  font-size: 22px; font-weight: 600;
-  margin-bottom: 8px;
-}
-.pricing-price {
-  font-family: var(--font-display);
-  font-size: 36px; font-weight: 700;
-  margin-bottom: 4px;
-}
-.pricing-price span {
-  font-size: 16px; font-weight: 400; color: var(--text-muted);
-}
-.pricing-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 28px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--border);
-}
-.pricing-features {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 32px;
-}
-.pricing-features li {
-  font-size: 14px;
-  color: var(--text-secondary);
-  display: flex; align-items: flex-start; gap: 10px;
-}
-.pricing-features li::before {
-  content: '✓';
-  color: var(--accent);
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.pricing-card .btn-primary, .pricing-card .btn-secondary {
-  width: 100%;
-  justify-content: center;
-  padding: 14px 24px;
-  font-size: 15px;
-}
-
-/* ---- TEAM ---- */
-.team { background: var(--bg-secondary); }
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  margin-top: 56px;
-  max-width: 800px;
-}
-.team-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 36px;
-  transition: all 0.3s;
-}
-.team-card:hover { border-color: var(--border-accent); }
-.team-avatar {
-  width: 64px; height: 64px;
-  background: var(--gradient-1);
-  border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display);
-  font-size: 24px; font-weight: 700;
-  color: var(--bg-primary);
-  margin-bottom: 20px;
-}
-.team-card h3 {
-  font-family: var(--font-display);
-  font-size: 20px; font-weight: 600;
-  margin-bottom: 4px;
-}
-.team-role {
-  font-size: 14px;
-  color: var(--accent);
-  font-weight: 500;
-  margin-bottom: 12px;
-}
-.team-card p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* ---- CTA ---- */
-.cta-section {
-  padding: 120px 0;
-  text-align: center;
-  position: relative;
-}
-.cta-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0,212,170,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.cta-section .section-title { max-width: 600px; margin: 0 auto 20px; }
-.cta-section .section-subtitle { margin: 0 auto 40px; text-align: center; }
-.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-/* ---- FOOTER ---- */
-footer {
-  padding: 48px 0;
-  border-top: 1px solid var(--border);
-}
-footer .container {
-  display: flex; justify-content: space-between; align-items: center;
-}
-.footer-logo {
-  font-family: var(--font-display);
-  font-size: 20px; font-weight: 700;
-  color: var(--text-primary);
-}
-.footer-logo span { color: var(--accent); }
-.footer-links { display: flex; gap: 24px; }
-.footer-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--text-primary); }
-.footer-copy { font-size: 13px; color: var(--text-muted); }
-
-/* ---- SCROLL ANIMATIONS ---- */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---- RESPONSIVE ---- */
-@media (max-width: 900px) {
-  .nav-links { display: none; }
-  .mobile-menu-btn { display: block; }
-  .problem-grid { grid-template-columns: 1fr; }
-  .solution-grid { grid-template-columns: 1fr; }
-  .diff-grid { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-  .team-grid { grid-template-columns: 1fr; max-width: 400px; }
-  .hero-stats { gap: 32px; flex-wrap: wrap; }
-  .compare-table { overflow-x: auto; }
-  footer .container { flex-direction: column; gap: 24px; text-align: center; }
-  .section { padding: 80px 0; }
-}
-@media (max-width: 600px) {
-  .hero h1 { letter-spacing: -1px; }
-  .hero-stats { gap: 24px; }
-  .hero-stat .number { font-size: 28px; }
+@media(max-width:600px){
+  .hero h1{letter-spacing:-1px}
+  .h-num{font-size:24px}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="container">
-    <a href="#" class="nav-logo">Optial<span>y</span></a>
-    <div class="nav-links">
+<nav class="nav">
+  <div class="wrap">
+    <a href="#" class="nav-logo">Optial<b>y</b></a>
+    <div class="nav-links" id="nl">
       <a href="#problem">Problem</a>
       <a href="#solution">Solution</a>
       <a href="#demo">Demo</a>
       <a href="#compare">Compare</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#team">Team</a>
-      <a href="/cdn-cgi/l/email-protection#731b161f1f1c331c03071a121f0a5d101c1e" class="nav-cta">Get a Demo</a>
+      <a href="mailto:hello@optialy.com" class="nav-cta">Get a Demo</a>
     </div>
-    <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'">
-      <span></span><span></span><span></span>
+    <button class="mob-btn" onclick="document.getElementById('nl').classList.toggle('open')">
+      <i></i><i></i><i></i>
     </button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container">
+  <div class="wrap">
     <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> Real-Time Intelligence Platform</div>
-      <h1>Marketing moves<br>in minutes.<br><span class="gradient-text">Your analytics should too.</span></h1>
-      <p>Optialy is the real-time intelligence layer for marketing. Ask questions in natural language, get instant analysis with actionable insights — while your campaigns are still running.</p>
-      <div class="hero-actions">
-        <a href="/cdn-cgi/l/email-protection#98f0fdf4f4f7d8f7e8ecf1f9f4e1b6fbf7f5" class="btn-primary">Request a Demo →</a>
-        <a href="#demo" class="btn-secondary">▶ Watch Demo</a>
+      <div class="hero-badge">
+        <span class="hero-dot"></span> Real-Time Intelligence Platform
+      </div>
+      <h1>Marketing moves<br>in minutes.<br><em>Your analytics should too.</em></h1>
+      <p class="hero-desc">Optialy is the real-time intelligence layer for marketing. Ask questions in natural language, get instant analysis with actionable insights &mdash; while your campaigns are still running.</p>
+      <div class="hero-btns">
+        <a href="mailto:hello@optialy.com" class="bp">Request a Demo &rarr;</a>
+        <a href="#demo" class="bs">&#9654; Watch Demo</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="number">0 sec</div>
-          <div class="label">Data movement required</div>
+        <div class="h-stat">
+          <div class="h-num">0 sec</div>
+          <div class="h-lbl">Data movement required</div>
         </div>
-        <div class="hero-stat">
-          <div class="number">100×</div>
-          <div class="label">Faster than batch pipelines</div>
+        <div class="h-stat">
+          <div class="h-num">100x</div>
+          <div class="h-lbl">Faster than batch pipelines</div>
         </div>
-        <div class="hero-stat">
-          <div class="number">$6.2B</div>
-          <div class="label">Marketing analytics market</div>
+        <div class="h-stat">
+          <div class="h-num">$6.2B</div>
+          <div class="h-lbl">Marketing analytics market</div>
         </div>
       </div>
     </div>
@@ -747,97 +253,97 @@ footer .container {
 </section>
 
 <!-- PROBLEM -->
-<section class="section problem" id="problem">
-  <div class="container">
-    <span class="section-label fade-in">The Speed Gap</span>
-    <h2 class="section-title fade-in">Marketing runs in real time.<br>Analytics still runs in days.</h2>
-    <p class="section-subtitle fade-in">Every hour of delay costs you money. Campaigns overspend, promotions sell out unnoticed, and attribution arrives after the budget is gone.</p>
-    <div class="problem-grid">
-      <div class="problem-card fade-in">
-        <div class="problem-icon">📡</div>
+<section class="sec" id="problem">
+  <div class="wrap">
+    <span class="label fi">The Speed Gap</span>
+    <h2 class="title fi">Marketing runs in real time.<br>Analytics still runs in days.</h2>
+    <p class="subtitle fi">Every hour of delay costs you money. Campaigns overspend, promotions sell out unnoticed, and attribution arrives after the budget is gone.</p>
+    <div class="pgrid">
+      <div class="pcard fi">
+        <div class="picon">&#128225;</div>
         <h3>Paid Media</h3>
         <p>Google, Meta, TikTok spend changes hourly. CPC moves by the minute. But your reports arrive tomorrow.</p>
       </div>
-      <div class="problem-card fade-in">
-        <div class="problem-icon">🛒</div>
+      <div class="pcard fi">
+        <div class="picon">&#128722;</div>
         <h3>E-commerce</h3>
         <p>Flash sales spike instantly. Inventory sells out in hours. Your dashboards refresh overnight.</p>
       </div>
-      <div class="problem-card fade-in">
-        <div class="problem-icon">🔀</div>
+      <div class="pcard fi">
+        <div class="picon">&#128256;</div>
         <h3>Cross-Channel Attribution</h3>
-        <p>Search, social, influencers, display — all stitched together in batch pipelines using last week's data.</p>
+        <p>Search, social, influencers, display &mdash; all stitched together in batch pipelines using last week&rsquo;s data.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- SOLUTION -->
-<section class="section" id="solution">
-  <div class="container">
-    <span class="section-label fade-in">The Solution</span>
-    <h2 class="section-title fade-in">Ask questions. Get instant answers.<br>While campaigns are still running.</h2>
-    <p class="section-subtitle fade-in">Optialy queries your data in-place — directly on your ad platforms, commerce systems, and databases. No ETL. No pipelines. No waiting.</p>
-    <div class="solution-grid">
-      <div class="solution-visual fade-in">
-        <div class="flow-diagram">
-          <div class="flow-step">
-            <div class="flow-num">1</div>
+<section class="sec sec-alt" id="solution">
+  <div class="wrap">
+    <span class="label fi">The Solution</span>
+    <h2 class="title fi">Ask questions. Get instant answers.<br>While campaigns are still running.</h2>
+    <p class="subtitle fi">Optialy queries your data in-place &mdash; directly on your ad platforms, commerce systems, and databases. No ETL. No pipelines. No waiting.</p>
+    <div class="sgrid">
+      <div class="svis fi">
+        <div class="fl">
+          <div class="fls">
+            <div class="fln">1</div>
             <div>
-              <div class="flow-label">Connect your data sources</div>
-              <div class="flow-desc">Ads, web analytics, databases, existing APIs</div>
+              <div class="flt">Connect your data sources</div>
+              <div class="fld">Ads, web analytics, databases, existing APIs</div>
             </div>
           </div>
-          <div class="flow-connector"></div>
-          <div class="flow-step">
-            <div class="flow-num">2</div>
+          <div class="flc"></div>
+          <div class="fls">
+            <div class="fln">2</div>
             <div>
-              <div class="flow-label">Optialy intelligence layer</div>
-              <div class="flow-desc">In-place real-time analytics — zero data movement</div>
+              <div class="flt">Optialy intelligence layer</div>
+              <div class="fld">In-place real-time analytics &mdash; zero data movement</div>
             </div>
           </div>
-          <div class="flow-connector"></div>
-          <div class="flow-step">
-            <div class="flow-num">3</div>
+          <div class="flc"></div>
+          <div class="fls">
+            <div class="fln">3</div>
             <div>
-              <div class="flow-label">Ask in natural language</div>
-              <div class="flow-desc">"Which campaigns are underperforming right now?"</div>
+              <div class="flt">Ask in natural language</div>
+              <div class="fld">&ldquo;Which campaigns are underperforming right now?&rdquo;</div>
             </div>
           </div>
-          <div class="flow-connector"></div>
-          <div class="flow-step">
-            <div class="flow-num">4</div>
+          <div class="flc"></div>
+          <div class="fls">
+            <div class="fln">4</div>
             <div>
-              <div class="flow-label">Instant visual insights</div>
-              <div class="flow-desc">Reports, alerts, and actionable next steps in seconds</div>
+              <div class="flt">Instant visual insights</div>
+              <div class="fld">Reports, alerts, and actionable next steps in seconds</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="solution-features fade-in">
-        <div class="solution-feature">
-          <div class="feature-icon">💬</div>
+      <div class="sfeats fi">
+        <div class="sfeat">
+          <div class="sfi">&#128172;</div>
           <div>
             <h4>Natural-Language Analytics</h4>
             <p>Ask questions about live marketing data in plain English. No SQL, no dashboards to navigate, no waiting for reports.</p>
           </div>
         </div>
-        <div class="solution-feature">
-          <div class="feature-icon">🧠</div>
+        <div class="sfeat">
+          <div class="sfi">&#129504;</div>
           <div>
             <h4>Intelligent LLM Selector</h4>
-            <p>Our system automatically routes each query to the best AI model for that specific question — not locked to a single LLM.</p>
+            <p>Our system automatically routes each query to the best AI model for that specific question &mdash; not locked to a single LLM.</p>
           </div>
         </div>
-        <div class="solution-feature">
-          <div class="feature-icon">🔒</div>
+        <div class="sfeat">
+          <div class="sfi">&#128274;</div>
           <div>
             <h4>Zero Data Movement</h4>
             <p>Your data never leaves your systems. Optialy queries in-place, eliminating duplication and security risk entirely.</p>
           </div>
         </div>
-        <div class="solution-feature">
-          <div class="feature-icon">📊</div>
+        <div class="sfeat">
+          <div class="sfi">&#128202;</div>
           <div>
             <h4>Automated Insight Generation</h4>
             <p>Instant executive-ready analysis and real-time visualizations, generated on demand or triggered by alerts.</p>
@@ -849,24 +355,21 @@ footer .container {
 </section>
 
 <!-- DEMO -->
-<section class="section demo-section" id="demo">
-  <div class="container">
-    <div class="demo-header fade-in">
-      <span class="section-label">See It In Action</span>
-      <h2 class="section-title">From question to insight<br>in seconds.</h2>
-      <p class="section-subtitle">Watch how Optialy turns natural-language questions into real-time visual analysis — no dashboards, no pipelines, no waiting.</p>
+<section class="sec" id="demo">
+  <div class="wrap">
+    <div class="demoh fi">
+      <span class="label">See It In Action</span>
+      <h2 class="title">From question to insight in seconds.</h2>
+      <p class="subtitle">Watch how Optialy turns natural-language questions into real-time visual analysis &mdash; no dashboards, no pipelines, no waiting.</p>
     </div>
-    <div class="demo-wrapper fade-in">
-      <div class="demo-glow"></div>
-      <div class="demo-frame">
-        <div class="demo-topbar">
-          <div class="demo-dots">
-            <span></span><span></span><span></span>
-          </div>
-          <div class="demo-title">Optialy — Live Demo</div>
-          <div></div>
+    <div class="demow fi">
+      <div class="demof">
+        <div class="demobar">
+          <div class="demodots"><i></i><i></i><i></i></div>
+          <div class="demotl">Optialy &mdash; Live Demo</div>
+          <div class="demosp"></div>
         </div>
-        <video controls playsinline preload="metadata" poster="">
+        <video controls playsinline preload="metadata">
           <source src="demo.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -876,12 +379,12 @@ footer .container {
 </section>
 
 <!-- COMPARE -->
-<section class="section diff" id="compare">
-  <div class="container">
-    <span class="section-label fade-in">Why Optialy</span>
-    <h2 class="section-title fade-in">Not all analytics are created equal.</h2>
-    <p class="section-subtitle fade-in">How your data moves makes all the difference.</p>
-    <div class="compare-table fade-in">
+<section class="sec sec-alt" id="compare">
+  <div class="wrap">
+    <span class="label fi">Why Optialy</span>
+    <h2 class="title fi">Not all analytics are created equal.</h2>
+    <p class="subtitle fi">How your data moves makes all the difference.</p>
+    <div class="cmp fi">
       <table>
         <thead>
           <tr>
@@ -902,7 +405,7 @@ footer .container {
             <td>Lightweight, instant integration</td>
           </tr>
           <tr>
-            <td>Security & Privacy</td>
+            <td>Security and Privacy</td>
             <td>Data duplication, exposure risk</td>
             <td>In-place, zero data movement</td>
           </tr>
@@ -927,100 +430,44 @@ footer .container {
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="section" id="pricing">
-  <div class="container">
-    <span class="section-label fade-in">Pricing</span>
-    <h2 class="section-title fade-in">Start fast. Scale with confidence.</h2>
-    <p class="section-subtitle fade-in">Simple, transparent pricing that grows with your data needs.</p>
-    <div class="pricing-grid">
-      <div class="pricing-card fade-in">
-        <div class="pricing-tier">Growth</div>
-        <div class="pricing-price">$10K–$25K <span>/ year</span></div>
-        <div class="pricing-desc">For performance teams getting started with real-time analytics.</div>
-        <ul class="pricing-features">
-          <li>Core real-time analytics</li>
-          <li>Natural language queries</li>
-          <li>Up to 3 data sources</li>
-          <li>Self-serve onboarding</li>
-          <li>Email support</li>
-        </ul>
-        <a href="/cdn-cgi/l/email-protection#b8d0ddd4d4d7f8d7c8ccd1d9d4c196dbd7d5" class="btn-secondary">Get Started</a>
-      </div>
-      <div class="pricing-card featured fade-in">
-        <div class="pricing-tier">Scale</div>
-        <div class="pricing-price">$30K–$75K <span>/ year</span></div>
-        <div class="pricing-desc">For multi-team organizations needing cross-channel intelligence.</div>
-        <ul class="pricing-features">
-          <li>Everything in Growth</li>
-          <li>Advanced AI models</li>
-          <li>Unlimited data sources</li>
-          <li>Automated alerts & reports</li>
-          <li>Priority support</li>
-        </ul>
-        <a href="/cdn-cgi/l/email-protection#325a575e5e5d725d42465b535e4b1c515d5f" class="btn-primary">Get Started</a>
-      </div>
-      <div class="pricing-card fade-in">
-        <div class="pricing-tier">Enterprise</div>
-        <div class="pricing-price">$100K+ <span>/ year</span></div>
-        <div class="pricing-desc">For global enterprises requiring platform-grade security and governance.</div>
-        <ul class="pricing-features">
-          <li>Everything in Scale</li>
-          <li>SSO, audit logs, RBAC</li>
-          <li>Custom AI model training</li>
-          <li>SLA & governance controls</li>
-          <li>Dedicated onboarding</li>
-        </ul>
-        <a href="/cdn-cgi/l/email-protection#650d0009090a250a15110c04091c4b060a08" class="btn-secondary">Contact Sales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section class="section team" id="team">
-  <div class="container">
-    <span class="section-label fade-in">Team</span>
-    <h2 class="section-title fade-in">Built by engineers who<br>understand marketing data.</h2>
-    <div class="team-grid">
-      <div class="team-card fade-in">
-        <div class="team-avatar">MA</div>
-        <h3>Mohamd Ahmadi</h3>
-        <div class="team-role">Product Lead</div>
-        <p>MSc Computer Science, University of Toronto. 7+ years building scalable analytics platforms at leading tech companies.</p>
-      </div>
-      <div class="team-card fade-in">
-        <div class="team-avatar">CN</div>
-        <h3>Cameron Nir</h3>
-        <div class="team-role">Technical Lead</div>
-        <p>MSc Computer Science, University of Toronto. Deep technical expertise combined with hands-on marketing strategy experience.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <span class="section-label fade-in">Ready?</span>
-    <h2 class="section-title fade-in">Stop analyzing yesterday's data.<br><span style="background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Start deciding in real time.</span></h2>
-    <p class="section-subtitle fade-in">See how Optialy can transform your marketing intelligence. Book a personalized demo with our team.</p>
-    <div class="cta-actions fade-in">
-      <a href="/cdn-cgi/l/email-protection#c2aaa7aeaead82adb2b6aba3aebbeca1adaf" class="btn-primary">Request a Demo →</a>
+<section class="ctasec">
+  <div class="wrap">
+    <span class="label fi">Ready?</span>
+    <h2 class="title fi">Stop analyzing yesterday&rsquo;s data.<br><em>Start deciding in real time.</em></h2>
+    <p class="subtitle fi">See how Optialy can transform your marketing intelligence. Book a personalized demo with our team.</p>
+    <div class="ctabtns fi">
+      <a href="mailto:hello@optialy.com" class="ba">Request a Demo &rarr;</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-logo">Optial<span>y</span></div>
-    <div class="footer-links">
-      <a href="/cdn-cgi/l/email-protection#1078757c7c7f507f606479717c693e737f7d">Contact</a>
-      <a href="https://optialy.com/#work">Product</a>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-logo">Optial<b>y</b></div>
+    <div class="foot-lnks">
+      <a href="mailto:hello@optialy.com">Contact</a>
+      <a href="#demo">Product</a>
     </div>
-    <div class="footer-copy">© 2026 Optialy. All rights reserved.</div>
+    <div class="foot-cp">&copy; 2026 Optialy. All rights reserved.</div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.
+<script>
+var o = new IntersectionObserver(function(entries) {
+  for (var i = 0; i < entries.length; i++) {
+    if (entries[i].isIntersecting) {
+      entries[i].target.classList.add('v');
+    }
+  }
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+var els = document.querySelectorAll('.fi');
+for (var j = 0; j < els.length; j++) {
+  o.observe(els[j]);
+}
+</script>
+
+</body>
+</html>
